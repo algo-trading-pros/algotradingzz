@@ -1,7 +1,5 @@
 from bs4 import BeautifulSoup as Soup
-import os
 from yahoo_fin import stock_info as si
-import requests
 from datetime import datetime
 import time
 import csv_fileHandler

@@ -1,5 +1,3 @@
-
-#Import writer class from csv module
 import os
 from csv import writer
 from csv import DictWriter
