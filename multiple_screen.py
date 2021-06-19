@@ -147,22 +147,7 @@ class Page1(tk.Frame):
 	def __init__(self, parent, controller):
 
 		tk.Frame.__init__(self, parent)
-		#label = ttk.Label(self, text ="Page 1", font = LARGEFONT)
-		#label.pack(pady=10,padx=10)
 
-
-
-
-
-		# layout2
-
-
-
-
-
-		#f = Figure(figsize=(5,5),dpi=100)
-		#a = f.add_subplot(111)
-		#a.plot([1,4,3,6,7,3,2,5,8],[5,7,7,3,8,9,5,6,4])
 
 		canvas = FigureCanvasTkAgg(f, self)
 		canvas.draw()
@@ -172,7 +157,7 @@ class Page1(tk.Frame):
 		toolbar = NavigationToolbar2Tk(canvas, self)
 		toolbar.update()
 
-		button1 = ttk.Button(self, text ="StartPage",
+		button1 = ttk.Button(self, text ="Main Menu",
 							command = lambda : controller.show_frame(StartPage))
 		button1.pack(pady=10, padx=10)
 
@@ -189,7 +174,7 @@ class Page2(tk.Frame):
 		label = ttk.Label(self, text ="Page 2", font = LARGEFONT)
 		label.pack()
 
-		button2 = ttk.Button(self, text ="Startpage",
+		button2 = ttk.Button(self, text ="Main Menu",
 							command = lambda : controller.show_frame(StartPage))
 		button2.pack()
 
@@ -199,7 +184,7 @@ class Page3(tk.Frame):
 		label = ttk.Label(self, text ="Page 3", font = LARGEFONT)
 		label.pack()
 
-		button2 = ttk.Button(self, text ="Startpage",
+		button2 = ttk.Button(self, text ="Main Menu",
 							command = lambda : controller.show_frame(StartPage))
 		button2.pack()
 
@@ -209,7 +194,7 @@ class Page4(tk.Frame):
 		label = ttk.Label(self, text ="Page 4", font = LARGEFONT)
 		label.pack()
 
-		button2 = ttk.Button(self, text ="Startpage",
+		button2 = ttk.Button(self, text ="Main Menu",
 							command = lambda : controller.show_frame(StartPage))
 		button2.pack()
 
@@ -220,7 +205,7 @@ class Page5(tk.Frame):
 		label = ttk.Label(self, text ="Page 5", font = LARGEFONT)
 		label.pack()
 
-		button2 = ttk.Button(self, text ="Startpage",
+		button2 = ttk.Button(self, text ="Main Menu",
 							command = lambda : controller.show_frame(StartPage))
 		button2.pack()
 
