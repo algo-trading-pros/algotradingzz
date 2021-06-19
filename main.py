@@ -9,7 +9,9 @@ from matplotlib import style
 import pandas as pd
 from yahoo_fin import stock_info as si
 import numpy as np
-
+from threading import Thread
+import profit_loss
+import ratio_exit
 
 
 LARGEFONT =("Verdana", 35)
@@ -17,20 +19,10 @@ style.use("ggplot")
 
 f = Figure(figsize=(10,6),dpi=100)
 a = f.add_subplot(111)
-"""
-def animate(i) :
-	pullData = open("dataset","r").read()
-	dataList = pullData.split('\n')
-	xList = []
-	yList = []
-	for eachLine in dataList:
-		if len(eachLine) > 1:
-			x, y =eachLine.split(',')
-			xList.append(int(x))
-			yList.append(int(y))
-	a.clear()
-	a.plot(xList,yList)
-"""
+
+def makeAThread(function):
+    Thread(target = function).start()
+
 def animate(i) :
 	reliance_data=si.get_data("RELIANCE.ns")
 
@@ -53,9 +45,6 @@ def animate(i) :
 	a.legend(bbox_to_anchor=(0,1.02, 1 , .102), loc=3,ncol=2, borderaxespad=0)
 	title = "EMA & SMA comparison\nLast Price: " + str(df2["close"].values)
 	a.set_title(title)
-
-
-
 
 class tkinterApp(tk.Tk):
 
@@ -98,7 +87,6 @@ class tkinterApp(tk.Tk):
 		frame.tkraise()
 
 # first window frame startpage
-
 class StartPage(tk.Frame):
 	def __init__(self, parent, controller):
 		tk.Frame.__init__(self, parent)
@@ -118,14 +106,14 @@ class StartPage(tk.Frame):
 		button1.grid(row = 1, column = 1, padx = 10, pady = 10)
 
 		## button to show frame 2 with text layout2
-		button2 = ttk.Button(self, text ="Page 2",
+		button2 = ttk.Button(self, text ="Max Profit and Loss",
 		command = lambda : controller.show_frame(Page2))
 
 		# putting the button in its place by
 		# using grid
 		button2.grid(row = 2, column = 1, padx = 10, pady = 10)
 
-		button3 = ttk.Button(self, text ="Page 3",
+		button3 = ttk.Button(self, text ="Ratio Exit",
 		command = lambda : controller.show_frame(Page3))
 
 		button3.grid(row = 3, column = 1, padx = 10, pady = 10)
@@ -139,7 +127,6 @@ class StartPage(tk.Frame):
 		command = lambda : controller.show_frame(Page5))
 
 		button5.grid(row = 5, column = 1, padx = 10, pady = 10)
-
 
 # second window frame page1
 class Page1(tk.Frame):
@@ -165,14 +152,41 @@ class Page1(tk.Frame):
 		#T = Text(self, height = 5, width = 52)
 		#text = Text(self)
 
-
-
 # third window frame page2
 class Page2(tk.Frame):
 	def __init__(self, parent, controller):
 		tk.Frame.__init__(self, parent)
-		label = ttk.Label(self, text ="Page 2", font = LARGEFONT)
+
+
+
+		label = ttk.Label(self, text ="max profit and loss", font = LARGEFONT)
 		label.pack()
+
+		share_symbol=tk.StringVar()	
+		ttk.Label(self, text = 'Enter Symbol', font=('calibre',10, 'bold')).pack() 
+		ttk.Entry(self,textvariable = share_symbol, font=('calibre',10,'normal')).pack()
+	
+
+		profit_cap=tk.StringVar()	
+		ttk.Label(self, text = 'Enter ProfitCap', font=('calibre',10, 'bold')).pack()
+		ttk.Entry(self,textvariable = profit_cap, font=('calibre',10,'normal')).pack()
+		
+
+		loss_cap=tk.StringVar()	
+		ttk.Label(self, text = 'Enter Loss cap', font=('calibre',10, 'bold')).pack()
+		ttk.Entry(self,textvariable = loss_cap, font=('calibre',10,'normal')).pack()
+	
+
+		number_of_share=tk.StringVar()	
+		ttk.Label(self, text = 'Enter Number Of shares', font=('calibre',10, 'bold')).pack() 
+		ttk.Entry(self,textvariable = number_of_share, font=('calibre',10,'normal')).pack()
+
+		ttk.Button(self, text ="Run Profit Loss",
+							command = lambda : Thread(target = lambda :profit_loss.Max(share_symbol.get(),profit_cap.get(),loss_cap.get(),number_of_share.get()))
+							.start()).pack()
+		
+		
+
 
 		button2 = ttk.Button(self, text ="Main Menu",
 							command = lambda : controller.show_frame(StartPage))
@@ -181,8 +195,33 @@ class Page2(tk.Frame):
 class Page3(tk.Frame):
 	def __init__(self, parent, controller):
 		tk.Frame.__init__(self, parent)
-		label = ttk.Label(self, text ="Page 3", font = LARGEFONT)
+		label = ttk.Label(self, text ="ratio exit", font = LARGEFONT)
 		label.pack()
+      
+		share_symbol=tk.StringVar()	
+		ttk.Label(self, text = 'Enter Symbol', font=('calibre',10, 'bold')).pack() 
+		ttk.Entry(self,textvariable = share_symbol, font=('calibre',10,'normal')).pack()
+
+
+		ratio=tk.StringVar()	
+		ttk.Label(self, text = 'Enter Ratio', font=('calibre',10, 'bold')).pack()
+		ttk.Entry(self,textvariable = ratio, font=('calibre',10,'normal')).pack()
+
+
+		risk_amount=tk.StringVar()	
+		ttk.Label(self, text = 'Enter risk amount', font=('calibre',10, 'bold')).pack()
+		ttk.Entry(self,textvariable = risk_amount, font=('calibre',10,'normal')).pack()
+
+
+		number_of_share=tk.StringVar()	
+		ttk.Label(self, text = 'Enter Number Of shares', font=('calibre',10, 'bold')).pack() 
+		ttk.Entry(self,textvariable = number_of_share, font=('calibre',10,'normal')).pack()
+
+		ttk.Button(self, text ="Run Ratio",
+							command = lambda : Thread(target = lambda :ratio_exit.ratio(share_symbol.get(),number_of_share.get(),ratio.get(),risk_amount.get(),))
+							.start()).pack()
+
+
 
 		button2 = ttk.Button(self, text ="Main Menu",
 							command = lambda : controller.show_frame(StartPage))
@@ -193,7 +232,6 @@ class Page4(tk.Frame):
 		tk.Frame.__init__(self, parent)
 		label = ttk.Label(self, text ="Page 4", font = LARGEFONT)
 		label.pack()
-
 		button2 = ttk.Button(self, text ="Main Menu",
 							command = lambda : controller.show_frame(StartPage))
 		button2.pack()

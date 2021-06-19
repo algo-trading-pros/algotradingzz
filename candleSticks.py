@@ -5,7 +5,6 @@ import time
 import csv_fileHandler
 
 
-
 def make_candleSticks(share_symbol):
     while True:
         t_end = time.time() + 55 * 1
