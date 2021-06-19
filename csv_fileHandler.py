@@ -1,5 +1,4 @@
 import os
-from csv import writer
 from csv import DictWriter
 
 
