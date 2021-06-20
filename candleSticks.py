@@ -1,4 +1,3 @@
-from bs4 import BeautifulSoup as Soup
 from yahoo_fin import stock_info as si
 from datetime import datetime
 import time

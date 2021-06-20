@@ -12,6 +12,7 @@ import numpy as np
 from threading import Thread
 import profit_loss
 import ratio_exit
+from tkinter import PhotoImage
 
 
 LARGEFONT =("Verdana", 35)
@@ -90,7 +91,6 @@ class tkinterApp(tk.Tk):
 class StartPage(tk.Frame):
 	def __init__(self, parent, controller):
 		tk.Frame.__init__(self, parent)
-
 		# label of frame Layout 2
 		label = ttk.Label(self, text ="Startpage", font = LARGEFONT)
 
