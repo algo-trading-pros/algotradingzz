@@ -1,7 +1,5 @@
 import tkinter as tk
 from tkinter import Frame, ttk
-#import matplotlib
-#matplotlib.use("TkAgg")
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 import matplotlib.animation as animation
@@ -119,7 +117,7 @@ class StartPage(tk.Frame):
 
 		button3.grid(row = 3, column = 1, padx = 10, pady = 10)
 
-		button4 = ttk.Button(self, text ="Page 4",
+		button4 = ttk.Button(self, text ="Auto Exit",
 		command = lambda : controller.show_frame(Page4))
 
 		button4.grid(row = 4, column = 1, padx = 10, pady = 10)
@@ -274,7 +272,7 @@ class Page4(tk.Frame):
 		h = ttk.OptionMenu(self, eminute, *options)
 		h.grid(row=6, column=2, padx=10, pady=2.5)
 
-		ttk.Button(self, text="Next", padx=15, pady=2.5, fg="black", bg="white",
+		ttk.Button(self, text="Next",
 					command=lambda: time_dependend.run_auto_exit(share_symbol.get(), number_of_share.get(),shour.get(), sminute.get(),ehour.get(),eminute.get())).grid(row=10, column=10, padx=5, pady=5)
       
       
