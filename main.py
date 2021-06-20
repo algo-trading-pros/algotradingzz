@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import Frame, ttk
 #import matplotlib
 #matplotlib.use("TkAgg")
 from matplotlib.figure import Figure
@@ -13,6 +13,7 @@ from threading import Thread
 import profit_loss
 import ratio_exit
 from tkinter import PhotoImage
+import time_dependend
 
 
 LARGEFONT =("Verdana", 35)
@@ -230,11 +231,56 @@ class Page3(tk.Frame):
 class Page4(tk.Frame):
 	def __init__(self, parent, controller):
 		tk.Frame.__init__(self, parent)
-		label = ttk.Label(self, text ="Page 4", font = LARGEFONT)
-		label.pack()
+		
+		#symbol
+		share_symbol=tk.StringVar()	
+		ttk.Label(self, text = 'Enter Symbol', font=('calibre',10, 'bold')).grid(row=0, column=0, padx=10, pady=2.5)
+		ttk.Entry(self,textvariable = share_symbol, font=('calibre',10,'normal')).grid(row=0, column=1, padx=10, pady=2.5)
+
+		#number of share
+		number_of_share=tk.StringVar()	
+		ttk.Label(self, text = 'Enter Number Of shares', font=('calibre',10, 'bold')).grid(row=2, column=0, padx=10, pady=2.5)
+		ttk.Entry(self,textvariable = number_of_share, font=('calibre',10,'normal')).grid(row=2, column=1, padx=10, pady=2.5)
+
+		# starttime
+		ttk.Label(self, text="Enter Starting Time:").grid(row=3, column=0, padx=10, pady=2.5)
+
+		ttk.Label(self, text="Hour:").grid(row=3, column=1, padx=10, pady=2.5)
+		shour = tk.StringVar(value="Select an Hour")
+		options = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13",
+						"14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "00"]
+		h = ttk.OptionMenu(self, shour, *options)
+		h.grid(row=3, column=2, padx=10, pady=2.5)
+
+		ttk.Label(self, text="Minute:").grid(row=4, column=1, padx=10, pady=2.5)
+		sminute = tk.StringVar(value="Select an Minute")
+		options = ["00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"]
+		h = ttk.OptionMenu(self, sminute, *options)
+		h.grid(row=4, column=2, padx=10, pady=2.5)
+
+		# endingtime
+		ttk.Label(self, text="Enter Ending Time:").grid(row=5, column=0, padx=10, pady=2.5)
+
+		ttk.Label(self, text="Hour:").grid(row=5, column=1, padx=10, pady=2.5)
+		ehour = tk.StringVar(value="Select an Hour")
+		options = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13",
+						"14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "00"]
+		h = ttk.OptionMenu(self, ehour, *options)
+		h.grid(row=5, column=2, padx=10, pady=2.5)
+
+		ttk.Label(self, text="Minute:").grid(row=6, column=1, padx=10, pady=2.5)
+		eminute = tk.StringVar(value="Select an Minute")
+		options = ["00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"]
+		h = ttk.OptionMenu(self, eminute, *options)
+		h.grid(row=6, column=2, padx=10, pady=2.5)
+
+		ttk.Button(self, text="Next", padx=15, pady=2.5, fg="black", bg="white",
+					command=lambda: time_dependend.run_auto_exit(share_symbol.get(), number_of_share.get(),shour.get(), sminute.get(),ehour.get(),eminute.get())).grid(row=10, column=10, padx=5, pady=5)
+      
+      
 		button2 = ttk.Button(self, text ="Main Menu",
 							command = lambda : controller.show_frame(StartPage))
-		button2.pack()
+		button2.grid(row=10, column=0, padx=5, pady=5)
 
 class Page5(tk.Frame):
 	def __init__(self, parent, controller):
