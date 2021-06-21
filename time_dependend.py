@@ -5,9 +5,13 @@ import time
 import tkinter as tk 
 from threading import Thread
 from time import sleep
+import store_state
 
 def run_auto_exit(share_symbol:str,shares_number,startHour,startMin,endHour,endMin):
    shares_number=float(shares_number)
+   print("got symbol :",share_symbol)
+
+   store_state.saveConfig("time_dependend",[share_symbol,shares_number,startHour,startMin,endHour,endMin])
 
    starting_price= si.get_live_price(f"{share_symbol.upper()}.ns")
    amount_invested=shares_number*starting_price
@@ -26,12 +30,12 @@ def run_auto_exit(share_symbol:str,shares_number,startHour,startMin,endHour,endM
    def check():
             while True:
                   sleep(1)
-                  if time.strftime('%H')==startHour and time.strftime('%M')==startMin:
+                  if time.strftime('%H')==int(startHour) and time.strftime('%M')==int(startMin):
                      waiting.config(text="Waiting for end time...")
                      waiting.update()
                      while True:
                         sleep(1)
-                        if time.strftime('%H')==endHour and time.strftime('%M')==endMin:
+                        if time.strftime('%H')==int(endHour) and time.strftime('%M')==int(endMin):
                            break
                      break
                         

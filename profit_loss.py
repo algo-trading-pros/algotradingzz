@@ -2,14 +2,17 @@ from yahoo_fin import stock_info as si
 from time import sleep
 import tkinter as tk
 from threading import Thread
-
+import store_state
 def Max(share_symbol:str,profit_cap,loss_cap,number_of_share):
+        
 
         ##taking inputs
         share_symbol=share_symbol.upper()
         profit_cap=int(profit_cap)
         loss_cap=int(loss_cap)
         number_of_share=int(number_of_share)
+
+        store_state.saveConfig("profit_loss",[share_symbol,profit_cap,loss_cap,number_of_share])
 
         change_in_stock_price_for_profit=profit_cap/number_of_share
         change_in_stock_price_for_loss=loss_cap/number_of_share

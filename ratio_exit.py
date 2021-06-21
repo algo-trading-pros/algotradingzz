@@ -2,6 +2,7 @@
 from yahoo_fin import stock_info as si
 import tkinter as tk
 from threading import Thread
+import store_state
 
 def ratio(share_symbol:str,number_of_share,ratio_rnr,risk_amount):
 
@@ -9,6 +10,8 @@ def ratio(share_symbol:str,number_of_share,ratio_rnr,risk_amount):
     number_of_share=int(number_of_share)
     ratio_rnr=float(ratio_rnr)
     risk_amount=float(risk_amount)
+
+    store_state.saveConfig("ratio_exit",[share_symbol,ratio_rnr,risk_amount,number_of_share])
 
     current_price=si.get_live_price(f"{share_sybol}.ns")
     amount_invested=number_of_share*current_price
