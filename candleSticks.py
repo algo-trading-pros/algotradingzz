@@ -37,7 +37,7 @@ def make_candleSticks(share_symbol,candelstick_length):
         #writing candle stick to csv file
 
         csv_fileHandler.File("sample.csv",["open","Time of opening","HIGH","LOW","close"]).addRow(candlestick)
-        print(candlestick)
+        #print(candlestick)
 
 def main():
     share_symbol=input("Share_symbol: ").capitalize()
