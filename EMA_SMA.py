@@ -1,10 +1,10 @@
 
 
 import pandas as pd
-from yahoo_fin import stock_info as si
+
 import numpy as np
 
-from matplotlib import pyplot as plt
+
 
 
 import yfinance as yf

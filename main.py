@@ -1,26 +1,14 @@
-import tkinter
+
 import tkinter as tk
 from tkinter import Frame, ttk
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
-import matplotlib.animation as animation
-from matplotlib import style
-import pandas as pd
-from yahoo_fin import stock_info as si
-import numpy as np
+
 from threading import Thread
 import profit_loss
 import ratio_exit
-from tkinter import PhotoImage
+
 import time_dependend
 from matplotlib import style
-from matplotlib import pyplot as plt
-import matplotlib.dates as mdates
-import matplotlib.ticker as mticker
-import matplotlib.dates as mpl_dates
-import yfinance as yf
-import tkinter.scrolledtext as tkst
-import time
+
 import store_state
 from EMA_SMA import *
 from datetime import datetime
